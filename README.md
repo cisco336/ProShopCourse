@@ -39,17 +39,27 @@ Before you begin, ensure you have met the following requirements:
    git clone https://github.com/your-username/ProShopCourse.git
    cd ProShopCourse
 
-2. Install backend dependencies:
+2. Create and activate a virtual environment:
+    #### Create a virtual environment
+    python -m venv venv
+
+    #### Activate the virtual environment (on Windows)
+    venv\Scripts\activate
+
+    #### Activate the virtual environment (on macOS/Linux)
+    source venv/bin/activate
+
+3. Install backend dependencies:
 
     ```bash
     pip install -r backend/requirements.txt
 
-3. Install frontend dependencies:
+4. Install frontend dependencies:
 
     ```bash
     cd frontend
     npm install
-4. Set up the Django database:
+5. Set up the Django database:
 
     ```bash
     
@@ -57,7 +67,6 @@ Before you begin, ensure you have met the following requirements:
     python manage.py migrate
     ...
 
-5. Usage
 6. Start the Django development server:
 
     ```bash
