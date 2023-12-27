@@ -42,19 +42,17 @@ Before you begin, ensure you have met the following requirements:
 2. Install backend dependencies:
 
     ```bash
-    Copy code
     pip install -r backend/requirements.txt
 
 3. Install frontend dependencies:
 
     ```bash
-    Copy code
     cd frontend
     npm install
 4. Set up the Django database:
 
     ```bash
-    Copy code
+    
     cd backend
     python manage.py migrate
     ...
@@ -63,7 +61,6 @@ Before you begin, ensure you have met the following requirements:
 6. Start the Django development server:
 
     ```bash
-    Copy code
     cd backend
     python manage.py runserver
 
@@ -72,7 +69,6 @@ Before you begin, ensure you have met the following requirements:
 7. Start the React development server:
 
     ```bash
-    Copy code
     cd frontend
     npm start
 
