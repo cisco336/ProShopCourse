@@ -33,7 +33,9 @@ function ProductScreen() {
           {isFetching ? (
               <Loader />
           ) : !isSuccess ? (
-              <Message variant={"danger"}>{error}</Message>
+              <Message variant={"danger"}>
+                  Error: {error.error}, Status: {error.originalStatus}
+              </Message>
           ) : (
               <Row>
                   <Col md={6}>
@@ -83,25 +85,43 @@ function ProductScreen() {
                                       <Row>
                                           <Col>Qty:</Col>
                                           <Col xs="auto">
-                                            <Form.Select value={Qty} onChange={(e) => setQty(parseInt(e.target.value))}>
-                                                {
-                                                    [...Array(product.countInStock).keys()].map(k => <option key={k + 1} value={k + 1}>{k + 1}</option>)
-                                                }
-                                            </Form.Select>
-                                        </Col>
+                                              <Form.Select
+                                                  value={Qty}
+                                                  onChange={(e) =>
+                                                      setQty(
+                                                          parseInt(
+                                                              e.target.value
+                                                          )
+                                                      )
+                                                  }
+                                              >
+                                                  {[
+                                                      ...Array(
+                                                          product.countInStock
+                                                      ).keys(),
+                                                  ].map((k) => (
+                                                      <option
+                                                          key={k + 1}
+                                                          value={k + 1}
+                                                      >
+                                                          {k + 1}
+                                                      </option>
+                                                  ))}
+                                              </Form.Select>
+                                          </Col>
                                       </Row>
                                   </ListGroup.Item>
                               )}
-                            <div className="d-grid p-3">
-                                <Button
-                                    className="btn"
-                                    type="button"
-                                    disabled={product.countInStock == 0}
-                                    onClick={() => addToCartHandler(product)}
-                                >
-                                    Add To Cart
-                                </Button>
-                            </div>
+                              <div className="d-grid p-3">
+                                  <Button
+                                      className="btn"
+                                      type="button"
+                                      disabled={product.countInStock == 0}
+                                      onClick={() => addToCartHandler(product)}
+                                  >
+                                      Add To Cart
+                                  </Button>
+                              </div>
                           </ListGroup>
                       </Card>
                   </Col>
