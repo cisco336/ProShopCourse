@@ -6,7 +6,7 @@ export const userApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: "/",
     }),
-    tagTypes: ["Login"],
+    tagTypes: ["Login", "Register"],
     endpoints: (build) => ({
         userLogIn: build.mutation({
             query: ({ username, password }) => ({
@@ -15,6 +15,14 @@ export const userApi = createApi({
                 body: { username, password },
             }),
             invalidatesTags: ["Login"],
+        }),
+        userRegister: build.mutation({
+            query: ({ username, password, email, first_name, last_name }) => ({
+                url: "/api/users/register/",
+                method: "POST",
+                body: { username, password, email, first_name, last_name },
+            }),
+            invalidatesTags: ["Register", "Login"],
         }),
     }),
 });
@@ -30,10 +38,10 @@ export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        userIsLoged: (state, action) => ({...state, userData: {...action.payload}}),
-        userLogout: (state) => ({...state, userData: null})
+        userIsLoged: (state, {payload}) => ({...state, userData: {...payload}}),
+        userLogout: (state) => ({...state, userData: null}),
     }
 })
 
-export const { useUserLogInMutation } = userApi;
+export const { useUserLogInMutation, useUserRegisterMutation } = userApi;
 export const { userIsLoged, userLogout } = userSlice.actions;

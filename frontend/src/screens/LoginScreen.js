@@ -28,7 +28,7 @@ function LoginScreen() {
                     return;
                 }
                 localStorage.setItem("userData", JSON.stringify(res));
-                dispatch(userIsLoged(res));
+                // dispatch(userIsLoged(res));
                 setErrorMssg("");
             })
             .catch((error) => {
@@ -54,7 +54,7 @@ function LoginScreen() {
                 )}
                 {isLoading && <Loader />}
                 <Form onSubmit={submitHandler}>
-                    <Form.Group controlId="email">
+                    <Form.Group controlId="username">
                         <Form.Label>User Name</Form.Label>
                         <Form.Control
                             type="text"
@@ -79,7 +79,7 @@ function LoginScreen() {
                         />
                     </Form.Group>
                     <Button
-                        disabled={username === "" && password === ""}
+                        disabled={username === "" || password === ""}
                         className="my-3"
                         type="submt"
                         variant="primary"

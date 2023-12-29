@@ -32,6 +32,9 @@ class UserSerializer(serializers.ModelSerializer):
     def get_last_name(self, obj):
         return obj.last_name
     
+    def get_email(selft, obj):
+        return obj.email
+    
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)
     class Meta:

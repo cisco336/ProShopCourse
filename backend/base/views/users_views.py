@@ -22,6 +22,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     
 @api_view(['POST'])
 def registerUser(request):
+    print(request.data)
     data = request.data
     try:
         user = User.objects.create(
@@ -36,7 +37,7 @@ def registerUser(request):
         
         return Response(serializer.data)
     except Exception as err:
-        message = {"error": f"Unexpected {err=}, {type(err)=}"}
+        message = {"error": f"Unexpected {err=}, {type(err)=} {err}"}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
