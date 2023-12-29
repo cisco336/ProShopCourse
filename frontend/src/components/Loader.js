@@ -8,7 +8,7 @@ function Loader() {
         role='status'
         style={{
             height: '100px',
-            with: '100px',
+            width: '100px',
             margin: 'auto',
             display: 'block'
         }}

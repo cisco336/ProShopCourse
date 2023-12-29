@@ -11,14 +11,6 @@ export const productApi = createApi({
         getProductById: build.query({
             query: (id) => `/api/products/${id}`,
         }),
-        // A mutation endpoint
-        // updateTodo: build.mutation({
-        //     query: (updatedTodo) => ({
-        //         url: `/todos/${updatedTodo.id}`,
-        //         method: "POST",
-        //         body: updatedTodo,
-        //     }),
-        // }),
     }),
 });
 
