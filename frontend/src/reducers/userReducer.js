@@ -30,7 +30,7 @@ export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        userIsLoged: (state, action) => ({...state, ...action.payload}),
+        userIsLoged: (state, action) => ({...state, userData: {...action.payload}}),
         userLogout: (state) => ({...state, userData: null})
     }
 })

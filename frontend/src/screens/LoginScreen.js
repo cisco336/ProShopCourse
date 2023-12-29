@@ -15,7 +15,6 @@ function LoginScreen() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const {userData} = useSelector((state) => state.user);
 
     const redirect = location.search && location.search !== "" ? location.search.split("=")[1] : "/" ;
     
@@ -29,20 +28,22 @@ function LoginScreen() {
                     return;
                 }
                 localStorage.setItem("userData", JSON.stringify(res));
-                dispatch(userIsLoged(res))
+                dispatch(userIsLoged(res));
+                setErrorMssg("");
             })
             .catch((error) => {
                 setErrorMssg(error?.data?.detail || error);
             });
     };
 
+    const { userData } = useSelector((state) => state.user);
+
     useEffect(() => {
-        console.log(userData);
         if (userData) {
             navigate(redirect);
             return;
         }
-    }, []);
+    }, [userData]);
 
     return (
         <div>
