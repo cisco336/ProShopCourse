@@ -1,0 +1,160 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Proshop",
+    "dateExported": "2024-01-03T16:19:11.133Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "bbee61fe-f915-476d-894e-73de0e5e251b",
+            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "containerId": "",
+            "name": "Get all products",
+            "url": "{{host}}{{port}}{{allProducts}}",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-27T17:15:13.412Z",
+            "modified": "2023-12-27T17:17:05.699Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4617b526-5a19-4803-b244-26907ba02fd8",
+            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "containerId": "",
+            "name": "Get one product by id",
+            "url": "{{host}}{{port}}{{allProducts}}{{productId}}",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-12-27T17:19:37.658Z",
+            "modified": "2023-12-27T17:19:37.658Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d9cf3242-8a0e-4799-b9ba-b489f7dcd1d3",
+            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "containerId": "",
+            "name": "Get user profile",
+            "url": "{{host}}{{port}}{{userProfile}}",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-12-27T19:09:28.863Z",
+            "modified": "2023-12-27T20:04:26.821Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [],
+            "preReq": {
+                "runRequests": [
+                    {
+                        "reqId": "13342b79-2092-48c4-be46-d24529df9027",
+                        "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+                        "triggerCondition": "run-always",
+                        "triggerValue": ""
+                    }
+                ],
+                "options": {
+                    "clearCookies": true
+                }
+            }
+        },
+        {
+            "_id": "13342b79-2092-48c4-be46-d24529df9027",
+            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "containerId": "",
+            "name": "User Login",
+            "url": "{{host}}{{port}}{{login}}",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-12-27T19:17:30.745Z",
+            "modified": "2023-12-27T19:17:30.745Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"username\": \"franciscoarleo\",\n    \"password\": \"36147641\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3a441997-c028-49d4-878d-9eccc7bf94f3",
+            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "containerId": "",
+            "name": "Get all users",
+            "url": "{{host}}{{port}}{{allUsers}}",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-12-27T21:17:59.292Z",
+            "modified": "2023-12-27T21:17:59.292Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "{{token}}"
+            },
+            "tests": [],
+            "preReq": {
+                "runRequests": [
+                    {
+                        "reqId": "13342b79-2092-48c4-be46-d24529df9027",
+                        "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+                        "triggerCondition": "run-always",
+                        "triggerValue": ""
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "0268f313-765d-4360-a651-e08c13c8738b",
+            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "containerId": "",
+            "name": "User Register",
+            "url": "{{host}}{{port}}{{userRegister}}",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-12-27T21:36:14.429Z",
+            "modified": "2023-12-27T21:36:14.429Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "first_name",
+                        "value": "Jhon"
+                    },
+                    {
+                        "name": "last_name",
+                        "value": "Doe"
+                    },
+                    {
+                        "name": "username",
+                        "value": "JhonDoe"
+                    },
+                    {
+                        "name": "email",
+                        "value": "jhonDoe@email.com"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345"
+                    }
+                ]
+            },
+            "tests": []
+        }
+    ]
+}
