@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useUserRegisterMutation, userIsLoged } from "../reducers/userReducer";
-import { Button, Row, Col, Form, Stack } from "react-bootstrap";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Button, Form, Stack } from "react-bootstrap";
+import { useNavigate, useLocation } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
 
 function RegistrationScreen() {
-    const [userRegister, { isLoading, isError }] = useUserRegisterMutation();
+    const [userRegister, { isLoading }] = useUserRegisterMutation();
     const [errorMssg, setErrorMssg] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [cPassword, setCPassword] = useState("");
     const [email, setEmail] = useState("");
     const [first_name, setFirstName] = useState("");
     const [last_name, setLastName] = useState("");
@@ -31,7 +32,7 @@ function RegistrationScreen() {
             navigate(redirect);
             return;
         }
-    }, [userData]);
+    }, [userData, redirect, navigate]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -55,10 +56,25 @@ function RegistrationScreen() {
             });
     };
 
+    const confirmPasswordCheck = (passwordCheck) => {
+        if (passwordCheck === "" && passwordCheck === undefined) {
+            setErrorMssg("Please confirm your password");
+            return false;
+        }
+
+        if (passwordCheck === password) {
+            setErrorMssg("");
+            return true;
+        } else {
+            setErrorMssg("Password don't match.");
+            return false;
+        }
+    }
+
     return (
         <FormContainer>
             <h1>Register</h1>
-            {errorMssg != "" && (
+            {errorMssg !=="" && (
                 <Message variant={"danger"}>{errorMssg}</Message>
             )}
             {isLoading && <Loader />}
@@ -123,6 +139,23 @@ function RegistrationScreen() {
                         }}
                     />
                 </Form.Group>
+                <Form.Group controlId="cPassword">
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control
+                        type="password"
+                        placeholder="Confirm password"
+                        value={cPassword}
+                        onChange={(e) => {
+                            setErrorMssg("");
+                            setCPassword(e.target.value);
+                            confirmPasswordCheck(e.target.value);
+                        }}
+                        onBlur={(e) => {
+                            setErrorMssg("");
+                            confirmPasswordCheck(e.target.value);
+                        }}
+                    />
+                </Form.Group>
                 <Stack direction="horizontal" className="my-3" gap={3}>
                     <Button className="" variant="light">
                         Go back
@@ -131,9 +164,11 @@ function RegistrationScreen() {
                         disabled={
                             username === "" ||
                             password === "" ||
+                            cPassword === "" ||
                             first_name === "" ||
                             last_name === "" ||
-                            email === ""
+                            email === "" ||
+                            errorMssg !==""
                         }
                         className="ms-auto"
                         type="submt"
