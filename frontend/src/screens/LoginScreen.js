@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { useUserLogInMutation, userIsLoged } from "../reducers/userReducer";
+import { useUserLogInMutation } from "../reducers/userReducer";
 import { Button, Row, Col, Form, InputGroup } from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function LoginScreen() {
-    const [userLogIn, { isLoading, isError }] = useUserLogInMutation();
+    const [userLogIn, { isLoading }] = useUserLogInMutation();
     const [errorMssg, setErrorMssg] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [type, setType] = useState("password");
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const location = useLocation();
 
     const redirect = location.search && location.search !== "" ? location.search.split("=")[1] : "/" ;
@@ -50,7 +49,7 @@ function LoginScreen() {
         <div>
             <FormContainer>
                 <h1>Sign In</h1>
-                {errorMssg != "" && (
+                {errorMssg !== "" && (
                     <Message variant={"danger"}>{errorMssg}</Message>
                 )}
                 {isLoading && <Loader />}
@@ -79,7 +78,7 @@ function LoginScreen() {
                                     setErrorMssg("");
                                 }}
                             />
-                            <Button variant='dark'><i className={`fas fa-${type == "password" ? "eye":"eye-slash"}`} onClick={(e) => setType(type === "password" ? "text" : "password")}></i></Button>
+                            <Button variant='dark'><i className={`fas fa-${type === "password" ? "eye":"eye-slash"}`} onClick={(e) => setType(type === "password" ? "text" : "password")}></i></Button>
                         </InputGroup>
                     </Form.Group>
                     <Button

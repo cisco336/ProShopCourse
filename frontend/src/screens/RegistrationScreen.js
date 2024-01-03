@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useUserRegisterMutation, userIsLoged } from "../reducers/userReducer";
-import { Button, Row, Col, Form, Stack } from "react-bootstrap";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Button, Form, Stack } from "react-bootstrap";
+import { useNavigate, useLocation } from "react-router-dom";
 import FormContainer from "../components/FormContainer";
 import { useDispatch, useSelector } from "react-redux";
 
 function RegistrationScreen() {
-    const [userRegister, { isLoading, isError }] = useUserRegisterMutation();
+    const [userRegister, { isLoading }] = useUserRegisterMutation();
     const [errorMssg, setErrorMssg] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -32,7 +32,7 @@ function RegistrationScreen() {
             navigate(redirect);
             return;
         }
-    }, [userData]);
+    }, [userData, redirect, navigate]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -74,7 +74,7 @@ function RegistrationScreen() {
     return (
         <FormContainer>
             <h1>Register</h1>
-            {errorMssg != "" && (
+            {errorMssg !=="" && (
                 <Message variant={"danger"}>{errorMssg}</Message>
             )}
             {isLoading && <Loader />}
@@ -168,7 +168,7 @@ function RegistrationScreen() {
                             first_name === "" ||
                             last_name === "" ||
                             email === "" ||
-                            errorMssg != ""
+                            errorMssg !==""
                         }
                         className="ms-auto"
                         type="submt"
