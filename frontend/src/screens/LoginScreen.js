@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useUserLogInMutation, userIsLoged } from "../reducers/userReducer";
-import { Button, Row, Col, Form } from 'react-bootstrap';
+import { Button, Row, Col, Form, InputGroup } from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ function LoginScreen() {
     const [errorMssg, setErrorMssg] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [type, setType] = useState("password");
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
@@ -68,15 +69,18 @@ function LoginScreen() {
                     </Form.Group>
                     <Form.Group controlId="password">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Enter password"
-                            value={password}
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                                setErrorMssg("");
-                            }}
-                        />
+                        <InputGroup>
+                            <Form.Control
+                                type={type}
+                                placeholder="Enter password"
+                                value={password}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    setErrorMssg("");
+                                }}
+                            />
+                            <Button variant='dark'><i className={`fas fa-${type == "password" ? "eye":"eye-slash"}`} onClick={(e) => setType(type === "password" ? "text" : "password")}></i></Button>
+                        </InputGroup>
                     </Form.Group>
                     <Button
                         disabled={username === "" || password === ""}
