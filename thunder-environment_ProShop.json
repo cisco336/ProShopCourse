@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "environmentName": "ProShop",
-    "dateExported": "2024-01-03T16:20:57.542Z",
+    "dateExported": "2024-01-03T23:21:32.938Z",
     "version": "1.0",
     "variables": [
         {
@@ -39,6 +39,10 @@
         {
             "name": "userRegister",
             "value": "/api/users/register"
+        },
+        {
+            "name": "userProfileUpdate",
+            "value": "/api/users/profile/update/"
         }
     ]
 }

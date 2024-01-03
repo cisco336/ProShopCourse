@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { useUserLogInMutation } from "../reducers/userReducer";
+import { useUserLogInMutation, userIsLoged } from "../reducers/userReducer";
 import { Button, Row, Col, Form, InputGroup } from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function LoginScreen() {
     const [userLogIn, { isLoading }] = useUserLogInMutation();
@@ -13,6 +13,7 @@ function LoginScreen() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [type, setType] = useState("password");
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -28,11 +29,11 @@ function LoginScreen() {
                     return;
                 }
                 localStorage.setItem("userData", JSON.stringify(res));
-                // dispatch(userIsLoged(res));
+                dispatch(userIsLoged(res));
                 setErrorMssg("");
             })
             .catch((error) => {
-                setErrorMssg(error?.data?.detail || error);
+                setErrorMssg(error?.data?.detail || error?.message);
             });
     };
 

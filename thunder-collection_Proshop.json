@@ -1,60 +1,60 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proshop",
-    "dateExported": "2024-01-03T16:19:11.133Z",
+    "dateExported": "2024-01-03T23:21:18.077Z",
     "version": "1.1",
     "folders": [],
     "requests": [
         {
-            "_id": "bbee61fe-f915-476d-894e-73de0e5e251b",
-            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "_id": "c771d08c-620e-4525-9db7-653342288f0c",
+            "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
             "containerId": "",
             "name": "Get all products",
             "url": "{{host}}{{port}}{{allProducts}}",
             "method": "GET",
             "sortNum": 10000,
-            "created": "2023-12-27T17:15:13.412Z",
-            "modified": "2023-12-27T17:17:05.699Z",
+            "created": "2024-01-03T16:24:18.636Z",
+            "modified": "2024-01-03T16:24:18.636Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "4617b526-5a19-4803-b244-26907ba02fd8",
-            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "_id": "102376c0-e4d6-4e8b-94e6-44752701cd25",
+            "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
             "containerId": "",
             "name": "Get one product by id",
             "url": "{{host}}{{port}}{{allProducts}}{{productId}}",
             "method": "GET",
             "sortNum": 20000,
-            "created": "2023-12-27T17:19:37.658Z",
-            "modified": "2023-12-27T17:19:37.658Z",
+            "created": "2024-01-03T16:24:18.637Z",
+            "modified": "2024-01-03T16:24:18.637Z",
             "headers": [],
             "params": [],
             "tests": []
         },
         {
-            "_id": "d9cf3242-8a0e-4799-b9ba-b489f7dcd1d3",
-            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "_id": "7d872a2d-2adf-457a-87e5-69ffe5435cdc",
+            "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
             "containerId": "",
             "name": "Get user profile",
             "url": "{{host}}{{port}}{{userProfile}}",
             "method": "GET",
             "sortNum": 30000,
-            "created": "2023-12-27T19:09:28.863Z",
-            "modified": "2023-12-27T20:04:26.821Z",
+            "created": "2024-01-03T16:24:18.638Z",
+            "modified": "2024-01-03T18:32:10.801Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "{{token}}"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA0MzA2OTg2LCJpYXQiOjE3MDQzMDY2ODYsImp0aSI6IjFlMmE4ODljZThjNjRjMWY5NTI0NTgyYTkzZDRmNTAwIiwidXNlcl9pZCI6OH0.kh-So8F4a01yEa2oqoxIDC0I6mYN7S_4sWiqm30d9iA"
             },
             "tests": [],
             "preReq": {
                 "runRequests": [
                     {
-                        "reqId": "13342b79-2092-48c4-be46-d24529df9027",
-                        "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+                        "reqId": "eab18ed2-aa71-4ff7-b8f0-1272513444d4",
+                        "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
                         "triggerCondition": "run-always",
                         "triggerValue": ""
                     }
@@ -65,15 +65,15 @@
             }
         },
         {
-            "_id": "13342b79-2092-48c4-be46-d24529df9027",
-            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "_id": "eab18ed2-aa71-4ff7-b8f0-1272513444d4",
+            "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
             "containerId": "",
             "name": "User Login",
             "url": "{{host}}{{port}}{{login}}",
             "method": "POST",
             "sortNum": 40000,
-            "created": "2023-12-27T19:17:30.745Z",
-            "modified": "2023-12-27T19:17:30.745Z",
+            "created": "2024-01-03T16:24:18.639Z",
+            "modified": "2024-01-03T18:31:26.797Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -83,21 +83,21 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n    \"username\": \"franciscoarleo\",\n    \"password\": \"36147641\"\n}",
+                "raw": "{\n    \"username\": \"cisco336\",\n    \"password\": \"cisco36147641\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "3a441997-c028-49d4-878d-9eccc7bf94f3",
-            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "_id": "4e725d94-1daa-4f60-a682-912f56dfd529",
+            "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
             "containerId": "",
             "name": "Get all users",
             "url": "{{host}}{{port}}{{allUsers}}",
             "method": "GET",
             "sortNum": 50000,
-            "created": "2023-12-27T21:17:59.292Z",
-            "modified": "2023-12-27T21:17:59.292Z",
+            "created": "2024-01-03T16:24:18.640Z",
+            "modified": "2024-01-03T16:24:18.640Z",
             "headers": [],
             "params": [],
             "auth": {
@@ -108,8 +108,8 @@
             "preReq": {
                 "runRequests": [
                     {
-                        "reqId": "13342b79-2092-48c4-be46-d24529df9027",
-                        "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+                        "reqId": "eab18ed2-aa71-4ff7-b8f0-1272513444d4",
+                        "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
                         "triggerCondition": "run-always",
                         "triggerValue": ""
                     }
@@ -117,15 +117,15 @@
             }
         },
         {
-            "_id": "0268f313-765d-4360-a651-e08c13c8738b",
-            "colId": "02d7627d-5b82-40fc-8066-c14c52299f99",
+            "_id": "1d5bc946-f508-405a-970d-a7258e8c698d",
+            "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
             "containerId": "",
             "name": "User Register",
             "url": "{{host}}{{port}}{{userRegister}}",
             "method": "POST",
             "sortNum": 60000,
-            "created": "2023-12-27T21:36:14.429Z",
-            "modified": "2023-12-27T21:36:14.429Z",
+            "created": "2024-01-03T16:24:18.641Z",
+            "modified": "2024-01-03T16:24:18.641Z",
             "headers": [],
             "params": [],
             "body": {
@@ -155,6 +155,39 @@
                 ]
             },
             "tests": []
+        },
+        {
+            "_id": "abbe6a9b-cd4c-4dd7-b2d0-93762198eda4",
+            "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
+            "containerId": "",
+            "name": "Update profile",
+            "url": "{{host}}{{port}}{{userProfileUpdate}}",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2024-01-03T18:19:49.312Z",
+            "modified": "2024-01-03T18:19:49.312Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"first_name\": \"Francisco\",\n  \"last_name\": \"Arleo\",\n  \"username\": \"cisco336\",\n  \"password\": \"cisco36147641\",\n  \"email\": \"cisco336@gmail.com\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA0MzA2MTc1LCJpYXQiOjE3MDQzMDU4NzUsImp0aSI6IjU1NzA1YWMxYmFlZDQxNWFiNDBjOWFmYzAyNGQ4YWY3IiwidXNlcl9pZCI6OH0.kiZ6ashEqBrvx_tiKcDbQuRCUvGtx__5DJIMxJYaF7E"
+            },
+            "tests": [],
+            "preReq": {
+                "runRequests": [
+                    {
+                        "reqId": "eab18ed2-aa71-4ff7-b8f0-1272513444d4",
+                        "colId": "e09b6dab-70ca-4705-abaf-f3d0ab68f32c",
+                        "triggerCondition": "run-always",
+                        "triggerValue": ""
+                    }
+                ]
+            }
         }
     ]
 }
