@@ -1,0 +1,44 @@
+{
+    "client": "Thunder Client",
+    "environmentName": "ProShop",
+    "dateExported": "2024-01-03T16:20:57.542Z",
+    "version": "1.0",
+    "variables": [
+        {
+            "name": "host",
+            "value": "localhost:"
+        },
+        {
+            "name": "port",
+            "value": "8000"
+        },
+        {
+            "name": "allProducts",
+            "value": "/api/products/"
+        },
+        {
+            "name": "productId",
+            "value": "1"
+        },
+        {
+            "name": "userProfile",
+            "value": "/api/users/profile/"
+        },
+        {
+            "name": "login",
+            "value": "/api/users/login/"
+        },
+        {
+            "name": "token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNzEzMzAwLCJpYXQiOjE3MDM3MTMwMDAsImp0aSI6ImQxYzg3MWMyM2Q5OTQ5MzVhZGVjNWY2YTFkOWJiMzQ5IiwidXNlcl9pZCI6MX0.tE5Tm3NE2MvXpo-QjRzsiqT_zy0V4mnlKl9EdCbgdIE"
+        },
+        {
+            "name": "allUsers",
+            "value": "/api/users/"
+        },
+        {
+            "name": "userRegister",
+            "value": "/api/users/register"
+        }
+    ]
+}
