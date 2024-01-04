@@ -18,7 +18,7 @@ function CartScreen() {
     dispatch(cartRemoveItem(id));
   }
 
-  const checkOutHandler = () => navigate("/login?redirect=shipping")
+  const checkOutHandler = () => navigate("/shipping")
 
   let totalItemsQty = cartItems.reduce((a, b) => a + (b.Qty || 0), 0);
   let totalItemsPrice = cartItems.reduce((a, b) => a + (parseFloat(b.price) * b.Qty || 0), 0);
