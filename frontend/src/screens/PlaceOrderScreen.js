@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Link } from "react-router-dom";
 import {
@@ -10,31 +10,59 @@ import {
     Image,
     ListGroup,
 } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useCreateOrderMutation } from '../reducers/orderReducer';
+import Loader from '../components/Loader';
+import Message from "../components/Message";
+import { clearCart } from '../reducers/cartReducer'
+import { useNavigate } from 'react-router-dom';
 
 function PlaceOrderScreen() {
+    const [createOrder, { isError, isSuccess, isLoading, error }] =
+        useCreateOrderMutation();
     const cart = useSelector((state) => state.cart);
+    const user = useSelector((state) => state.user);
     const { shippingAddress, paymentMethod, cartItems } = cart;
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     let itemsPrice = cartItems.reduce(
         (acc, item) => acc + item.Qty * item.price,
         0,
     );
-
     let shippingPrice = (itemsPrice > 100 ? 0 : 10).toFixed(2);
-
     let taxPrice = parseInt(0.082 * itemsPrice).toFixed(2);
-
     let totalPrice = parseFloat(itemsPrice + shippingPrice + taxPrice).toFixed(2); 
 
     const placeOrder = (e) => {
         e.preventDefault();
+        createOrder({
+            user: user.userData,
+            orderItems: cartItems,
+            paymentMethod,
+            taxPrice,
+            shippingPrice,
+            shippingAddress,
+            totalPrice,
+        });
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(clearCart());
+        }
+        if (error?.status && error?.status === 401) {
+            setTimeout(() => navigate("/login"), 3000);
+        }
+    }, [isLoading, isSuccess, isError])
 
     return (
         <>
             <CheckoutSteps step1 step2 step3 step4 />
             <h1>Place Order</h1>
+            {isLoading && <Loader />}
+            {isSuccess && <Message variant={"success"}>Order created.</Message>}
+            {error && <Message variant={"danger"}>{`${error.message}. You will be redirected to the login page. Status code: ${error.status}`}</Message>}
             <Row>
                 <Col md={8}>
                     <ListGroup variant="flush">
