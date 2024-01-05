@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Link } from "react-router-dom";
 import {
@@ -16,6 +16,7 @@ import Loader from '../components/Loader';
 import Message from "../components/Message";
 import { clearCart } from '../reducers/cartReducer'
 import { useNavigate } from 'react-router-dom';
+import { userLogout } from "../reducers/userReducer";
 
 function PlaceOrderScreen() {
     const [createOrder, { isError, isSuccess, isLoading, error }] =
@@ -25,14 +26,17 @@ function PlaceOrderScreen() {
     const { shippingAddress, paymentMethod, cartItems } = cart;
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [sdkReady, setSdkReady] = useState(false);
 
-    let itemsPrice = cartItems.reduce(
+    let itemsPrice = cartItems?.reduce(
         (acc, item) => acc + item.Qty * item.price,
         0,
     );
     let shippingPrice = (itemsPrice > 100 ? 0 : 10).toFixed(2);
     let taxPrice = parseInt(0.082 * itemsPrice).toFixed(2);
-    let totalPrice = parseFloat(itemsPrice + shippingPrice + taxPrice).toFixed(2); 
+    let totalPrice = parseFloat(itemsPrice + shippingPrice + taxPrice).toFixed(
+        2,
+    );
 
     const placeOrder = (e) => {
         e.preventDefault();
@@ -44,6 +48,11 @@ function PlaceOrderScreen() {
             shippingPrice,
             shippingAddress,
             totalPrice,
+        })
+        .then(response => {
+            if (!response.error) {
+                navigate(`/orders/${response.data._id}`)
+            }
         });
     };
 
@@ -52,9 +61,13 @@ function PlaceOrderScreen() {
             dispatch(clearCart());
         }
         if (error?.status && error?.status === 401) {
+            dispatch(userLogout());
             setTimeout(() => navigate("/login"), 3000);
         }
-    }, [isLoading, isSuccess, isError])
+        if (error) {
+            // Handle other errors
+        }
+    }, [isLoading, isSuccess, isError]);
 
     return (
         <>
@@ -62,7 +75,11 @@ function PlaceOrderScreen() {
             <h1>Place Order</h1>
             {isLoading && <Loader />}
             {isSuccess && <Message variant={"success"}>Order created.</Message>}
-            {error && <Message variant={"danger"}>{`${error.message}. You will be redirected to the login page. Status code: ${error.status}`}</Message>}
+            {error && (
+                <Message
+                    variant={"danger"}
+                >{`${error.message}. You will be redirected to the login page. Status code: ${error.status}`}</Message>
+            )}
             <Row>
                 <Col md={8}>
                     <ListGroup variant="flush">
@@ -77,7 +94,7 @@ function PlaceOrderScreen() {
                         <ListGroup.Item className="flex-column">
                             <h1>Order Items</h1>
                             <ListGroup variant="flush">
-                                {cartItems.map((item, index) => (
+                                {cartItems && cartItems?.map((item, index) => (
                                     <ListGroup.Item key={index}>
                                         <Row>
                                             <Col md={2}>
@@ -141,7 +158,7 @@ function PlaceOrderScreen() {
                             <ListGroup.Item>
                                 <Stack className="my-3">
                                     <Button
-                                        disabled={cartItems.length == 0}
+                                        disabled={cartItems?.length == 0}
                                         type="button"
                                         onClick={(e) => {
                                             placeOrder(e);

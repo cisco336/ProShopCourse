@@ -13,16 +13,16 @@ export const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        cartAddItem: (state, action) => {
+        cartAddItem: (state, {payload}) => {
             let exist =
-                state.cartItems.length > 0 &&
+                state?.cartItems?.length > 0 &&
                 state.cartItems.find(
-                    (item) => item._id === action.payload._id,
+                    (item) => item._id === payload._id,
                 ) !== undefined;
             if (!exist) {
                 return {
                     ...state,
-                    cartItems: [...state.cartItems, { ...action.payload }],
+                    cartItems: state.cartItems === null ? [{...payload}] : state.cartItems.push({...payload}),
                 };
             } else {
                 localStorage.setItem(
@@ -32,7 +32,7 @@ export const cartSlice = createSlice({
                 return {
                     ...state,
                     cartItems: state.cartItems.map((item) =>
-                        item._id === action.payload._id ? action.payload : item,
+                        item._id === payload._id ? payload : item,
                     ),
                 };
             }
@@ -50,7 +50,7 @@ export const cartSlice = createSlice({
             localStorage.setItem("cartItems", null);
             return {
                 ...state,
-                cartItems: null
+                cartItems: []
             }
         },
         saveShippingAddress: (state, { payload }) => {

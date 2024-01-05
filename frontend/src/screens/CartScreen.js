@@ -20,20 +20,20 @@ function CartScreen() {
 
   const checkOutHandler = () => navigate("/shipping")
 
-  let totalItemsQty = cartItems.reduce((a, b) => a + (b.Qty || 0), 0);
-  let totalItemsPrice = cartItems.reduce((a, b) => a + (parseFloat(b.price) * b.Qty || 0), 0);
+  let totalItemsQty = cartItems?.reduce((a, b) => a + (b.Qty || 0), 0);
+  let totalItemsPrice = cartItems?.reduce((a, b) => a + (parseFloat(b.price) * b.Qty || 0), 0);
 
   return (
       <Row>
           <Col md={8}>
               <h1>Shopping Cart</h1>
-              {cartItems.length === 0 ? (
+              {!cartItems || cartItems?.length === 0 ? (
                   <Message variant={"info"}>
                       Your cart is empty <Link to="/">Go Back</Link>
                   </Message>
               ) : (
                   <ListGroup as="ol" numbered variant="flush">
-                      {cartItems.map((item) => (
+                      {cartItems?.map((item) => (
                           <ListGroup.Item as="li" key={item._id}>
                               <Row>
                                   <Col md={2}>
@@ -58,15 +58,15 @@ function CartScreen() {
                                                   cartAddItem({
                                                       ...item,
                                                       Qty: parseInt(
-                                                          e.target.value
+                                                          e.target.value,
                                                       ),
-                                                  })
+                                                  }),
                                               )
                                           }
                                       >
                                           {[
                                               ...Array(
-                                                  item.countInStock
+                                                  item.countInStock,
                                               ).keys(),
                                           ].map((k) => (
                                               <option key={k + 1} value={k + 1}>
@@ -103,7 +103,12 @@ function CartScreen() {
                       </ListGroup.Item>
                   </ListGroup>
                   <div className="d-grid p-3">
-                      <Button type="button" className="dark" disabled={cartItems.length === 0} onClick={checkOutHandler}>
+                      <Button
+                          type="button"
+                          className="dark"
+                          disabled={cartItems?.length === 0}
+                          onClick={checkOutHandler}
+                      >
                           Proceed to checkout
                       </Button>
                   </div>

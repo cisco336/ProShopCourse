@@ -1,10 +1,10 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from base.serializers import ProductSerializer, OrderSerializer
+from base.serializers import OrderSerializer
 from base.models import Product, Order, OrderItem, ShippingAddress
+from datetime import datetime
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -47,4 +47,29 @@ def addOrderItems(request):
             product.save()
     
     serializer = OrderSerializer(order, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrderById(request, pk):
+    user = request.user
+    order = Order.objects.get(_id = pk)
+    if user.is_staff or order.user == user:
+        serializar = OrderSerializer(order, many = False)
+        return Response(serializar.data)
+    else:
+        return Response({'detail':'Not authorized to view this order'})
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateOrderToPaid(request, pk):
+    order = Order.objects.get(_id = pk)
+    
+    order.isPaid = True
+    order.paidAt = datetime.now()
+    order.save()
+    
+    serializer = OrderSerializer(order, many=False)
+    
     return Response(serializer.data)

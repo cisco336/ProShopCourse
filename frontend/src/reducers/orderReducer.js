@@ -33,6 +33,35 @@ export const orderApi = createApi({
                     totalPrice,
                 },
             }),
+            invalidatesTags: ["Orders"],
+            transformErrorResponse: (response, meta, arg) => {
+                return {
+                    status: response.status,
+                    message: response.data.detail,
+                };
+            },
+        }),
+        getOrderDetails: build.query({
+            query: (id) => ({
+                url: `/api/orders/${id}`,
+            }),
+            transformResponse: (response, meta, arg) => {
+                return { ...response };
+            },
+            transformErrorResponse: (response, meta, arg) => {
+                return {
+                    status: response.status,
+                    message: response.data.detail,
+                };
+            },
+        }),
+        updateOrderPaid: build.mutation({
+            query: (id) => ({
+                url: `/api/orders/${id}/pay/`,
+            }),
+            transformResponse: (response, meta, arg) => {
+                return { ...response };
+            },
             transformErrorResponse: (response, meta, arg) => {
                 return {
                     status: response.status,
@@ -43,4 +72,4 @@ export const orderApi = createApi({
     }),
 });
 
-export const { useCreateOrderMutation } = orderApi;
+export const { useCreateOrderMutation, useGetOrderDetailsQuery, useUpdateOrderPaidMutation } = orderApi;
